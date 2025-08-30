@@ -1,0 +1,66 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: akh-mongo-prod
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: ai_knowledge_hub
+    networks:
+      - akh-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: akh-redis
+    restart: always
+    networks:
+      - akh-network
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    image: ghcr.io/<YOUR_ORG>/ai-knowledge-hub-backend:latest
+    container_name: akh-backend
+    restart: always
+    depends_on:
+      - mongo
+      - redis
+    env_file:
+      - ../backend/.env.example
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - MONGO_DB=ai_knowledge_hub
+      - REDIS_URL=redis://redis:6379
+      - DEBUG=0
+      - ALLOWED_HOSTS=your.domain.com
+    ports:
+      - "8000:8000" # Expose for debugging or behind reverse proxy
+    volumes:
+      - ../backend:/app:ro
+    networks:
+      - akh-network
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    image: ghcr.io/<YOUR_ORG>/ai-knowledge-hub-frontend:latest
+    container_name: akh-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    networks:
+      - akh-network
+
+volumes:
+  mongo_data:
+
+networks:
+  akh-network:
+    driver: bridge
