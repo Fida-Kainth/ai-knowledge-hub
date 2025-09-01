@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -40,7 +41,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "project_name.urls"
+ROOT_URLCONF = "backend_project.urls"
 
 TEMPLATES = [
     {
@@ -58,7 +59,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "project_name.wsgi.application"
+WSGI_APPLICATION = "backend_project.wsgi.application"
 
 
 # Database
@@ -116,3 +117,5 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+AUTH_USER_MODEL = "users.User"
+

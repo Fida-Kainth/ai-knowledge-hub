@@ -2,8 +2,21 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import JsonResponse
+
+# 👋 Simple root message view
+def home(request):
+    return JsonResponse({
+        "message": "Welcome to AI Knowledge Hub API 🚀",
+        "endpoints": {
+            "auth": "/api/auth/",
+            "articles": "/api/articles/",
+            "ai": "/api/ai/"
+        }
+    })
 
 urlpatterns = [
+    path("", home),  # ✅ Root message
     path("admin/", admin.site.urls),
     path("api/auth/", include("apps.users.urls")),
     path("api/articles/", include("apps.articles.urls")),

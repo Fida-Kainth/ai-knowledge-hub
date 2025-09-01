@@ -2,7 +2,7 @@
 Socket.IO server (Async) for realtime token streaming and a helper
 `query_llm` function for non-streaming HTTP requests.
 
-- sio: AsyncServer instance used by project_name.asgi to mount sockets.
+- sio: AsyncServer instance used by backend_project.asgi to mount sockets.
 - chat_message handler streams tokens (demo) or can be extended to
   connect to a provider's streaming API.
 - query_llm(prompt, options) returns a text response (sync function).

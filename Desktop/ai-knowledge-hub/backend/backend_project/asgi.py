@@ -2,7 +2,8 @@ import os
 from django.core.asgi import get_asgi_application
 import socketio
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project_name.settings")
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend_project.settings')
+
 
 # Django ASGI app
 django_asgi_app = get_asgi_application()

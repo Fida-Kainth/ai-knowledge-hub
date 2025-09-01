@@ -14,7 +14,8 @@ pymongo[srv]==4.8.0
 
 # Realtime / sockets
 python-socketio==5.11.4
-python-engineio==4.4.0
+python-engineio>=4.8.0
+
 
 # Optional AI / embeddings (install if using provider/local models)
 openai==1.51.0
