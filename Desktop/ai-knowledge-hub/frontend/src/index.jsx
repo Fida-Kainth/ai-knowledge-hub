@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App";
+import App from "./App.jsx";   // ✅ fixed extension
 import "./styles/global.css";
 import "./styles/components.css";
 
@@ -15,3 +15,4 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
